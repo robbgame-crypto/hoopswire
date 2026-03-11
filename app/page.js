@@ -1,11 +1,13 @@
 'use client';
 import { useState, useEffect, useCallback } from 'react';
 
-// ── Local storage helpers for draft comparison ──
+// ── Local storage helpers for draft comparison (SSR-safe) ──
 function saveDraftList(prospects) {
+  if (typeof window === 'undefined') return;
   try { localStorage.setItem('hw-draft', JSON.stringify({ date: new Date().toDateString(), list: prospects.map(p => p.name).join(',') })); } catch(_) {}
 }
 function loadYesterdayDraftList() {
+  if (typeof window === 'undefined') return null;
   try {
     const d = JSON.parse(localStorage.getItem('hw-draft') || 'null');
     if (!d || d.date === new Date().toDateString()) return null;
