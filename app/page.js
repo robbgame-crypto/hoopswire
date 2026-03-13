@@ -682,7 +682,7 @@ export default function HoopsBriefing() {
         </div>
 
         <div className="main">
-          </div>
+
 
           <div className="run-section">
             <button className="run-btn" onClick={runBriefing} disabled={loading}>
@@ -788,7 +788,7 @@ export default function HoopsBriefing() {
             <div className="empty-state">
               <span className="empty-icon">🏀</span>
               <div className="empty-title">No Briefing Yet</div>
-              <div className="empty-sub">"Hit 'Run Briefing Now' to fetch last night's results"</div>
+              <div className="empty-sub">Hit Run Briefing Now to fetch last night results</div>
             </div>
           )}
         </div>
