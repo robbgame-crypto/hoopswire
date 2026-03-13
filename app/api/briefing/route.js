@@ -114,10 +114,10 @@ export async function POST(request) {
 
     const client = new Anthropic({ apiKey });
     const response = await client.messages.create({
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-haiku-4-5-20251001',
       max_tokens: 2500,
       system: SYSTEM_PROMPT,
-      tools: [{ type: 'web_search_20250305', name: 'web_search', max_uses: 8 }],
+      tools: [{ type: 'web_search_20250305', name: 'web_search', max_uses: 5 }],
       messages: [{
         role: 'user',
         content: `Generate the morning basketball briefing JSON for ${dateStr}. Search for NBA scores, CBB scores, all legacy players on the list, Tankathon top-15 lottery projections, and last night's ATS results. ${draftContext} Return ONLY valid JSON matching the specified structure.`
