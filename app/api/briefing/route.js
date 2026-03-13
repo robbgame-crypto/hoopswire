@@ -115,9 +115,9 @@ export async function POST(request) {
     const client = new Anthropic({ apiKey });
     const response = await client.messages.create({
       model: 'claude-sonnet-4-20250514',
-      max_tokens: 4000,
+      max_tokens: 2500,
       system: SYSTEM_PROMPT,
-      tools: [{ type: 'web_search_20250305', name: 'web_search' }],
+      tools: [{ type: 'web_search_20250305', name: 'web_search', max_uses: 8 }],
       messages: [{
         role: 'user',
         content: `Generate the morning basketball briefing JSON for ${dateStr}. Search for NBA scores, CBB scores, all legacy players on the list, Tankathon top-15 lottery projections, and last night's ATS results. ${draftContext} Return ONLY valid JSON matching the specified structure.`
@@ -131,7 +131,7 @@ export async function POST(request) {
     if (!parsed) {
       const repair = await client.messages.create({
         model: 'claude-sonnet-4-20250514',
-        max_tokens: 4000,
+        max_tokens: 2500,
         messages: [{ role: 'user', content: `Fix this broken JSON and return ONLY the corrected JSON, nothing else:\n\n${rawText.slice(0, 8000)}` }]
       });
       const repairText = repair.content.filter(b => b.type === 'text').map(b => b.text).join('');
