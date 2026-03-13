@@ -109,7 +109,7 @@ export async function POST(request) {
     yesterday.setDate(yesterday.getDate() - 1);
     const dateStr = yesterday.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
     const draftContext = previousDraftList
-      ? `Yesterday\'s Tankathon top-15 order was: ${previousDraftList}. Use this to calculate the change field for each prospect.`
+      ? `Yesterday's Tankathon top-15 order was: ${previousDraftList}. Use this to calculate the change field for each prospect.`
       : `No previous draft data — set change to "0" for all prospects.`;
 
     const client = new Anthropic({ apiKey });
@@ -120,7 +120,7 @@ export async function POST(request) {
       tools: [{ type: 'web_search_20250305', name: 'web_search' }],
       messages: [{
         role: 'user',
-        content: `Generate the morning basketball briefing JSON for ${dateStr}. Search for NBA scores, CBB scores, all legacy players on the list, Tankathon top-15 lottery projections, and last night\'s ATS results. ${draftContext} Return ONLY valid JSON matching the specified structure.`
+        content: `Generate the morning basketball briefing JSON for ${dateStr}. Search for NBA scores, CBB scores, all legacy players on the list, Tankathon top-15 lottery projections, and last night's ATS results. ${draftContext} Return ONLY valid JSON matching the specified structure.`
       }]
     });
 
